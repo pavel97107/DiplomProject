@@ -2,17 +2,21 @@ const popUpCall = () => {
     const popUpWindow = document.querySelector('.popup-call');
     const body = document.querySelector('body');
 
+
+    const addDisplay = (elem) => {
+        elem.classList.toggle('active-block');
+    };
+
     body.addEventListener('click', (event) => {
         let target = event.target;
         if (target.matches('.call-btn')) {
-            popUpWindow.style.display = 'block';
-
+            addDisplay(popUpWindow);
         }
         if (target.closest('.popup-close')) {
-            popUpWindow.style.display = 'none';
+            addDisplay(popUpWindow);
         }
         if (target.matches(".popup-call")) {
-            popUpWindow.style.display = 'none';
+            addDisplay(popUpWindow);
         }
     });
 
