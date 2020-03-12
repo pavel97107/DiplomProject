@@ -4,25 +4,36 @@ const popUpDiscount = () => {
     const element = container.querySelectorAll('.col-xs-12');
     const items = document.querySelectorAll('.windowAn');
 
-    const obj = {
+    const objAnimation = {
         count: -75,
-        speed: 5
+        speed: 2.5
     };
 
+    const objOpacity = {
+        count: 0,
+        speed: 0.02
+    };
 
     const animate = () => {
-
         items.forEach((item) => {
-            item.style.transform = `translateY(${obj.count}%)`;
+            item.style.transform = `translateY(${objAnimation.count}%)`;
         });
-
-        obj.count += obj.speed;
-        if (obj.count <= 0) {
+        objAnimation.count += objAnimation.speed;
+        if (objAnimation.count <= 0) {
             requestAnimationFrame(animate);
+
         }
     };
 
-
+    const animateOpacity = () => {
+        items.forEach((item) => {
+            item.style.opacity = `${objOpacity.count}`;
+        });
+        objOpacity.count += objOpacity.speed;
+        if (objOpacity.count <= 1) {
+            requestAnimationFrame(animateOpacity);
+        }
+    };
 
     const foo = () => {
         element.forEach((item) => {
@@ -34,6 +45,7 @@ const popUpDiscount = () => {
 
     btn.addEventListener('click', () => {
         foo();
+        requestAnimationFrame(animateOpacity);
         requestAnimationFrame(animate);
         btn.style.display = 'none';
     });

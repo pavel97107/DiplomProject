@@ -1,7 +1,8 @@
-.active-block {
-    display: block !important;
-}
-
 .windowAn {
     transform: translateY(-75%);
+    opacity: 0;
+}
+
+.active-block {
+    display: block !important;
 }
