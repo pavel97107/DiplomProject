@@ -1,3 +1,7 @@
 .active-block {
-    display: block;
+    display: block !important;
+}
+
+.windowAn {
+    transform: translateY(-75%);
 }
