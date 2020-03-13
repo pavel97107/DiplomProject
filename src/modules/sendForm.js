@@ -7,7 +7,7 @@ const sendForm = selector => {
   statusMessage.style.fontWeight = "500";
   const elementForm = document.querySelectorAll("input");
   const formDirector = document.querySelector('.director-form');
-  const body1 = document.querySelector('body');
+  const body = document.querySelector('body');
 
 
   form.addEventListener("input", event => {
@@ -68,25 +68,25 @@ const sendForm = selector => {
   };
 
 
-  body1.addEventListener("click", event => {
-    let target = event.target;
 
-    if (target.type !== "button" && target.type !== "submit") {
-      return;
-    }
+  const getData = () => {
+    body.addEventListener("click", event => {
+      let target = event.target;
 
-    const formData = new FormData(formDirector);
-    let main = {};
+      if (target.type === "submit") {
+        const formData = new FormData(formDirector);
+        let main = {};
 
-    formData.forEach((item, value) => {
-      main[value] = item;
+        formData.forEach((item, value) => {
+          main[value] = item;
+        });
+        addDataQuestion(main);
+      }
     });
+  };
 
-    if (target.type === "button" || target.type === "submit") {
-      addDataQuestion(main);
-    }
+  getData();
 
-  });
 
   const postData = body => {
     return fetch("./server.php", {
