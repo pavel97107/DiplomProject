@@ -3,6 +3,7 @@
 import popUpCall from './modules/popUpCall';
 import sendForm from './modules/sendForm';
 import btnMore from './modules/btnMore';
+import AccardionBlock from './modules/widthBlockAcardeon';
 
 
 popUpCall('.popup-call', '.call-btn', '.callBtn');
@@ -16,3 +17,4 @@ sendForm('.popup-check .capture-form');
 sendForm('.popup-consultation .capture-form');
 sendForm('.main-form');
 btnMore();
+AccardionBlock();

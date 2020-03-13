@@ -3,6 +3,23 @@
     opacity: 0;
 }
 
+.d-none {
+    display: none;
+}
+
 .active-block {
+    display: block !important;
+}
+
+.collapseElement {
+    overflow: hidden;
+}
+
+.heightAnimation {
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+}
+
+.animation-block {
     display: block !important;
 }
