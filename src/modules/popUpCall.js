@@ -1,7 +1,6 @@
-const popUpCall = () => {
-    const popUpWindow = document.querySelector('.popup-call');
+const popUpCall = (selector, btn, btnClose) => {
+    const popUpWindow = document.querySelector(selector);
     const body = document.querySelector('body');
-
 
     const addDisplay = (elem) => {
         elem.classList.toggle('active-block');
@@ -9,13 +8,13 @@ const popUpCall = () => {
 
     body.addEventListener('click', (event) => {
         let target = event.target;
-        if (target.matches('.call-btn')) {
+        if (target.matches(btn)) {
             addDisplay(popUpWindow);
         }
-        if (target.closest('.popup-close')) {
+        if (target.closest(btnClose)) {
             addDisplay(popUpWindow);
         }
-        if (target.matches(".popup-call")) {
+        if (target.matches(selector)) {
             addDisplay(popUpWindow);
         }
     });

@@ -1,4 +1,4 @@
-const popUpDiscount = () => {
+const btnMore = () => {
     const container = document.querySelector('.sentence .row');
     const btn = document.querySelector('.add-sentence-btn');
     const element = container.querySelectorAll('.col-xs-12');
@@ -51,4 +51,4 @@ const popUpDiscount = () => {
     });
 };
 
-export default popUpDiscount;
+export default btnMore;

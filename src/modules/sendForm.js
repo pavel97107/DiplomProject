@@ -6,6 +6,9 @@ const sendForm = selector => {
   statusMessage.style.fontSize = "20px";
   statusMessage.style.fontWeight = "500";
   const elementForm = document.querySelectorAll("input");
+  const formDirector = document.querySelector('.director-form');
+  const body1 = document.querySelector('body');
+
 
   form.addEventListener("input", event => {
     let target = event.target;
@@ -42,22 +45,47 @@ const sendForm = selector => {
     }
   };
 
-  form.addEventListener("submit", event => {
-    event.preventDefault();
-    form.append(statusMessage);
-    statusMessage.textContent = loadMessage;
+  const addDataQuestion = (element) => {
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      form.append(statusMessage);
+      statusMessage.textContent = loadMessage;
 
-    const formData = new FormData(form);
 
-    let body = {};
+      const formData = new FormData(form);
+
+      let body = {};
+      body.userQuestion = element;
+
+      formData.forEach((item, value) => {
+        body[value] = item;
+      });
+
+      postData(body)
+        .then(successMessage)
+        .catch();
+    });
+  };
+
+
+  body1.addEventListener("click", event => {
+    let target = event.target;
+
+    if (target.type !== "button" && target.type !== "submit") {
+      return;
+    }
+
+    const formData = new FormData(formDirector);
+    let main = {};
 
     formData.forEach((item, value) => {
-      body[value] = item;
+      main[value] = item;
     });
 
-    postData(body)
-      .then(successMessage)
-      .catch();
+    if (target.type === "button" || target.type === "submit") {
+      addDataQuestion(main);
+    }
+
   });
 
   const postData = body => {
@@ -69,5 +97,6 @@ const sendForm = selector => {
       body: JSON.stringify(body)
     });
   };
+
 };
 export default sendForm;
