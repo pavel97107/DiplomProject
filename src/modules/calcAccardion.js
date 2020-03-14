@@ -1,69 +1,84 @@
 const calc = (price = 10000) => {
-    const typeSeptic = document.querySelector('.typeSeptic');
-    const checkBottom = document.querySelector('.checkBottom');
-    const itemDis = document.querySelectorAll('.itemDisabled');
-    const calcContainer = document.querySelector('.calc-container');
+    const typeSeptic = document.querySelector(".typeSeptic");
+    const checkBottom = document.querySelector(".checkBottom");
+    const itemDis = document.querySelectorAll(".itemDisabled");
+    const calcContainer = document.querySelector(".calc-container");
 
-    const itemsDisabledTrue = () => {
-        itemDis.forEach((item) => {
-            item.classList.remove('itemDisabled');
-        });
-    };
+    // Параметры options
+    const diameterRingSelect = document.querySelector(".diameterRing");
+    const numberRingSelect = document.querySelector(".numberRing");
+    const calcResult = document.getElementById("calc-result");
+    const distance = document.querySelector('.distance');
+
+
+    // Функция удаляет класс (display = none)
     const itemsDisabledFalse = () => {
-        itemDis.forEach((item) => {
-            item.classList.add('itemDisabled');
+        itemDis.forEach(item => {
+            item.classList.remove("itemDisabled");
         });
     };
 
+    // Функция добовляет класс (display = none)
+    const itemsDisabledTrue = () => {
+        itemDis.forEach(item => {
+            item.classList.add("itemDisabled");
+        });
+    };
 
-
-
-    let diameter;
+    // total - общая сумма
+    // bottomValue - наличие дна
     let total;
     let bottomValue = 1000;
 
-    calcContainer.addEventListener('click', (event) => {
+    calcContainer.addEventListener("click", event => {
         let target = event.target;
 
-        if (target === target.closest('.typeSeptic')) {
-            typeSeptic.classList.toggle('two');
-            if (typeSeptic.classList.contains('two')) {
-                itemsDisabledTrue();
-            } else {
+        if (target === target.closest(".typeSeptic")) {
+            typeSeptic.classList.toggle("two");
+            if (typeSeptic.classList.contains("two")) {
                 itemsDisabledFalse();
-            }
-        }
-
-        if (target === target.closest('.checkBottom')) {
-            checkBottom.classList.toggle('bottomFalse');
-            if (checkBottom.classList.contains('bottomFalse')) {
-                bottomValue = 0;
-                console.log(bottomValue);
+                bottomValue = 2000;
             } else {
+                itemsDisabledTrue();
                 bottomValue = 1000;
-                console.log(bottomValue);
             }
         }
 
+        if (target === target.closest(".checkBottom")) {
+            checkBottom.classList.toggle("bottomFalse");
+            if (checkBottom.classList.contains("bottomFalse")) {
+                bottomValue = 0;
+            } else {
+                if (typeSeptic.classList.contains("two")) {
+                    bottomValue = 2000;
+                } else {
+                    bottomValue = 1000;
+                }
+            }
+        }
 
     });
 
 
+    const calculationOneType = () => {
+        const numberRing =
+            numberRingSelect.options[numberRingSelect.selectedIndex].value;
+        const diameterRing =
+            diameterRingSelect.options[diameterRingSelect.selectedIndex].value;
 
-    const calculation = () => {
-        const calcResult = document.getElementById('calc-result');
-        console.log(calcResult);
-
-
-        // total = price * diameter * numberRing + bottomValue;
-        // calcResult.value = total;
+        total = price * diameterRing * numberRing + bottomValue;
+        calcResult.value = total;
     };
 
-    calculation();
 
 
+    calcContainer.addEventListener("change", event => {
+        let target = event.target;
 
+        if (target.matches("select") || target.matches("input")) {
+            calculationOneType();
+        }
+    });
 };
-
 
 export default calc;
