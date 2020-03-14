@@ -27,11 +27,15 @@ const calc = () => {
         });
     };
 
+    //main object
+    const data = {};
+
+
     // total - общая сумма
     // bottomValue - наличие дна
-    let price = 10000;
-    let total;
-    let bottomValue = 1000;
+    data.price = 10000;
+    data.total = '';
+    data.bottomValue = 1000;
 
     calcContainer.addEventListener("click", event => {
         let target = event.target;
@@ -40,53 +44,54 @@ const calc = () => {
             typeSeptic.classList.toggle("two");
             if (typeSeptic.classList.contains("two")) {
                 itemsDisabledFalse();
-                bottomValue = 2000;
-                price = 15000;
+                data.bottomValue = 2000;
+                data.price = 15000;
             } else {
                 itemsDisabledTrue();
-                bottomValue = 1000;
-                price = 10000;
+                data.bottomValue = 1000;
+                data.price = 10000;
             }
         }
 
         if (target === target.closest(".checkBottom")) {
             checkBottom.classList.toggle("bottomFalse");
             if (checkBottom.classList.contains("bottomFalse")) {
-                bottomValue = 0;
+                data.bottomValue = 0;
             } else {
                 if (typeSeptic.classList.contains("two")) {
-                    bottomValue = 2000;
+                    data.bottomValue = 2000;
                 } else {
-                    bottomValue = 1000;
+                    data.bottomValue = 1000;
                 }
             }
         }
     });
 
     const calculationOneType = () => {
-        const numberRing =
+        data.numberRing =
             numberRingSelect.options[numberRingSelect.selectedIndex].value;
-        const diameterRing =
+        data.diameterRing =
             diameterRingSelect.options[diameterRingSelect.selectedIndex].value;
 
-        const numberRing2 =
+        data.numberRing2 =
             numberRingSelect2.options[numberRingSelect2.selectedIndex].value;
-        const diameterRing2 =
+        data.diameterRing2 =
             diameterRingSelect2.options[diameterRingSelect2.selectedIndex].value;
-        if (price === 15000) {
-            total =
-                price * diameterRing * numberRing * diameterRing2 * numberRing2 +
-                bottomValue;
+        if (data.price === 15000) {
+            data.total =
+                data.price * data.diameterRing * data.numberRing * data.diameterRing2 * data.numberRing2 +
+                data.bottomValue;
         } else {
-            total =
-                price * diameterRing * numberRing +
-                bottomValue;
+            data.total =
+                data.price * data.diameterRing * data.numberRing +
+                data.bottomValue;
         }
+        data.distanceHome = +distance.value;
 
     };
 
     const showTotal = () => {
-        calcResult.value = total;
+        calcResult.value = data.total;
     };
 
     calcContainer.addEventListener("change", event => {
@@ -103,5 +108,6 @@ const calc = () => {
 
 
 };
+
 
 export default calc;
