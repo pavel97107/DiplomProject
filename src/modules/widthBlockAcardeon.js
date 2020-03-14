@@ -1,7 +1,10 @@
-const AccardionBlock = () => {
-    const headerElement = document.querySelectorAll(".panelElement");
-    const collapseElement = document.querySelectorAll(".collapseElement");
-    const container = document.querySelector(".slideInDown");
+const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
+    const headerElement = document.querySelectorAll(elemHeader);
+    const collapseElement = document.querySelectorAll(elemContent);
+    const container = document.querySelector(elementContainer);
+    collapseElement[0].style.maxHeight = `${collapseElement[0].scrollHeight}px`;
+    collapseElement[0].style.transition = `max-height 0.5s ease-out`;
+
 
     const addClass = index => {
         for (let i = 0; i < collapseElement.length; i++) {
@@ -20,7 +23,7 @@ const AccardionBlock = () => {
 
     container.addEventListener("click", event => {
         let target = event.target;
-        target = target.closest(".panelElement");
+        target = target.closest(elemHeader);
         if (target) {
             headerElement.forEach((item, index) => {
                 if (target === item) {
@@ -29,9 +32,6 @@ const AccardionBlock = () => {
             });
         }
     });
-
-    console.log(collapseElement);
-    console.log(headerElement);
 };
 
 export default AccardionBlock;

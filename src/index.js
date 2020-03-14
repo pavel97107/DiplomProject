@@ -4,6 +4,7 @@ import popUpCall from './modules/popUpCall';
 import sendForm from './modules/sendForm';
 import btnMore from './modules/btnMore';
 import AccardionBlock from './modules/widthBlockAcardeon';
+import calc from './modules/calcAccardion';
 
 
 popUpCall('.popup-call', '.call-btn', '.callBtn');
@@ -17,4 +18,6 @@ sendForm('.popup-check .capture-form');
 sendForm('.popup-consultation .capture-form');
 sendForm('.main-form');
 btnMore();
-AccardionBlock();
+AccardionBlock(".panelElement", ".collapseElement", ".slideInDown");
+AccardionBlock(".calc-heading", ".calc-content", ".calc-container");
+calc();

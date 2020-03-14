@@ -15,6 +15,10 @@
     overflow: hidden;
 }
 
+.calc-content {
+    overflow: hidden;
+}
+
 .heightAnimation {
     max-height: 0;
     transition: max-height 0.5s ease-out;
@@ -22,4 +26,8 @@
 
 .animation-block {
     display: block !important;
+}
+
+.itemDisabled {
+    display: none !important;
 }
