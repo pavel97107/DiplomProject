@@ -1,4 +1,4 @@
-const calc = (price = 10000) => {
+const calc = () => {
     const typeSeptic = document.querySelector(".typeSeptic");
     const checkBottom = document.querySelector(".checkBottom");
     const itemDis = document.querySelectorAll(".itemDisabled");
@@ -7,6 +7,8 @@ const calc = (price = 10000) => {
     // Параметры options
     const diameterRingSelect = document.querySelector(".diameterRing");
     const numberRingSelect = document.querySelector(".numberRing");
+    const diameterRingSelect2 = document.querySelector(".diameterRing2");
+    const numberRingSelect2 = document.querySelector(".numberRing2");
     const calcResult = document.getElementById("calc-result");
     const distance = document.querySelector('.distance');
 
@@ -27,6 +29,7 @@ const calc = (price = 10000) => {
 
     // total - общая сумма
     // bottomValue - наличие дна
+    let price = 10000;
     let total;
     let bottomValue = 1000;
 
@@ -38,9 +41,11 @@ const calc = (price = 10000) => {
             if (typeSeptic.classList.contains("two")) {
                 itemsDisabledFalse();
                 bottomValue = 2000;
+                price = 15000;
             } else {
                 itemsDisabledTrue();
                 bottomValue = 1000;
+                price = 10000;
             }
         }
 
@@ -66,9 +71,32 @@ const calc = (price = 10000) => {
         const diameterRing =
             diameterRingSelect.options[diameterRingSelect.selectedIndex].value;
 
-        total = price * diameterRing * numberRing + bottomValue;
+        const numberRing2 =
+            numberRingSelect2.options[numberRingSelect2.selectedIndex].value;
+        const diameterRing2 =
+            diameterRingSelect2.options[diameterRingSelect2.selectedIndex].value;
+
+
+        total = price * diameterRing * numberRing * diameterRing2 * numberRing2 + bottomValue;
         calcResult.value = total;
     };
+
+    // const calculationTwoType = () => {
+    //     const numberRing =
+    //         numberRingSelect.options[numberRingSelect.selectedIndex].value;
+    //     const diameterRing =
+    //         diameterRingSelect.options[diameterRingSelect.selectedIndex].value;
+
+    //     const numberRing2 =
+    //         numberRingSelect2.options[numberRingSelect2.selectedIndex].value;
+    //     const diameterRing2 =
+    //         diameterRingSelect2.options[diameterRingSelect2.selectedIndex].value;
+
+
+    //     total = price * diameterRing * numberRing * diameterRing2 * numberRing2 + bottomValue;
+    //     calcResult.value = total;
+    // };
+
 
 
 
