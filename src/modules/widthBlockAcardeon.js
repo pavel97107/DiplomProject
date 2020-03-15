@@ -1,6 +1,7 @@
-const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
+const AccardionBlock = (elemHeader, elemContent, elementContainer, x) => {
     const headerElement = document.querySelectorAll(elemHeader);
     const collapseElement = document.querySelectorAll(elemContent);
+    const body = document.querySelector('span');
     const container = document.querySelector(elementContainer);
     const btnStep = document.querySelectorAll('.btn-step');
     const calcContentOne = document.querySelector('.calc-content');
@@ -35,11 +36,19 @@ const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
                 }
             });
         }
+
+
+        console.log(event.target);
     });
 
-    btnStep[0].addEventListener('click', () => {
-        calcContentOne.style.maxHeight = `${calcContentOne
-            .scrollHeight - calcContentOne.scrollHeight}px`;
+    btnStep[0].addEventListener('click', (event) => {
+        let target = event.target.matches('span');
+        if (target) {
+            return false;
+        } else {
+            calcContentOne.style.maxHeight = `${calcContentOne
+                .scrollHeight - calcContentOne.scrollHeight}px`;
+        }
     });
 
 

@@ -31,3 +31,6 @@
 .itemDisabled {
     display: none !important;
 }
+
+
+.after-element::after {}
