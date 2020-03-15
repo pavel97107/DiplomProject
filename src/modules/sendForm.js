@@ -1,4 +1,4 @@
-const sendForm = selector => {
+const sendForm = (selector, elem) => {
   const form = document.querySelector(selector);
   const loadMessage = "Загрузка....";
   const error = "Что то пошло не так!";
@@ -8,6 +8,9 @@ const sendForm = selector => {
   const elementForm = document.querySelectorAll("input");
   const formDirector = document.querySelector('.director-form');
   const body = document.querySelector('body');
+  const userQuestion = document.querySelector('.userQuestion');
+  // получаем данные с калькулятора
+  const calcResult = document.getElementById("calc-result");
 
 
   form.addEventListener("input", event => {
@@ -45,48 +48,33 @@ const sendForm = selector => {
     }
   };
 
-  const addDataQuestion = (element) => {
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-      form.append(statusMessage);
-      statusMessage.textContent = loadMessage;
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    form.append(statusMessage);
+    statusMessage.textContent = loadMessage;
+
+    const formData = new FormData(form);
+
+    let body = {};
+
+    if (userQuestion.value) {
+      body.userQuestion = userQuestion.value;
+    }
+
+    if (calcResult.value) {
+      body.resultCalc = elem;
+    }
 
 
-      const formData = new FormData(form);
-
-      let body = {};
-      body.userQuestion = element;
-
-      formData.forEach((item, value) => {
-        body[value] = item;
-      });
-
-      postData(body)
-        .then(successMessage)
-        .catch();
+    formData.forEach((item, value) => {
+      body[value] = item;
     });
-  };
 
-
-
-  const getData = () => {
-    body.addEventListener("click", event => {
-      let target = event.target;
-
-      if (target.type === "submit") {
-        const formData = new FormData(formDirector);
-        let main = {};
-
-        formData.forEach((item, value) => {
-          main[value] = item;
-        });
-        addDataQuestion(main);
-      }
-    });
-  };
-
-  getData();
-
+    postData(body)
+      .then(successMessage)
+      .catch();
+  });
 
   const postData = body => {
     return fetch("./server.php", {

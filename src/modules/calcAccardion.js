@@ -1,10 +1,11 @@
+const result = {};
+
 const calc = () => {
     const typeSeptic = document.querySelector(".typeSeptic");
     const checkBottom = document.querySelector(".checkBottom");
     const itemDis = document.querySelectorAll(".itemDisabled");
     const calcContainer = document.querySelector(".calc-container");
     const showTotalbtn = document.querySelector('.btnShowTotal');
-    console.log(typeSeptic);
     // Параметры options
     const diameterRingSelect = document.querySelector(".diameterRing");
     const numberRingSelect = document.querySelector(".numberRing");
@@ -77,17 +78,25 @@ const calc = () => {
             numberRingSelect2.options[numberRingSelect2.selectedIndex].value;
         data.diameterRing2 =
             diameterRingSelect2.options[diameterRingSelect2.selectedIndex].value;
+
+
         if (data.price === 15000) {
             data.total =
                 data.price * data.diameterRing * data.numberRing * data.diameterRing2 * data.numberRing2 +
                 data.bottomValue;
+            data.distanceHome = +distance.value;
         } else {
             data.total =
                 data.price * data.diameterRing * data.numberRing +
                 data.bottomValue;
-        }
-        data.distanceHome = +distance.value;
 
+            data.diameterRing2 = false;
+            data.numberRing2 = false;
+            data.distanceHome = +distance.value;
+        }
+
+
+        result.calc = JSON.stringify(data);
     };
 
     const showTotal = () => {
@@ -109,5 +118,7 @@ const calc = () => {
 
 };
 
-
-export default calc;
+export {
+    calc,
+    result
+};

@@ -2,6 +2,8 @@ const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
     const headerElement = document.querySelectorAll(elemHeader);
     const collapseElement = document.querySelectorAll(elemContent);
     const container = document.querySelector(elementContainer);
+    const btnStep = document.querySelectorAll('.btn-step');
+    const calcContentOne = document.querySelector('.calc-content');
     collapseElement[0].style.maxHeight = `${collapseElement[0].scrollHeight}px`;
     collapseElement[0].style.transition = `max-height 0.5s ease-out`;
 
@@ -18,13 +20,15 @@ const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
                 collapseElement[i].style.maxHeight = `${collapseElement[i]
           .scrollHeight - collapseElement[i].scrollHeight}px`;
             }
+
+
         }
     };
 
     container.addEventListener("click", event => {
         let target = event.target;
-        target = target.closest(elemHeader);
-        if (target) {
+
+        if (target === target.closest(elemHeader)) {
             headerElement.forEach((item, index) => {
                 if (target === item) {
                     addClass(index);
@@ -32,6 +36,13 @@ const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
             });
         }
     });
+
+    btnStep[0].addEventListener('click', () => {
+        calcContentOne.style.maxHeight = `${calcContentOne
+            .scrollHeight - calcContentOne.scrollHeight}px`;
+    });
+
+
 };
 
 export default AccardionBlock;
