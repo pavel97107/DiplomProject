@@ -90,8 +90,8 @@ const calc = () => {
                 data.price * data.diameterRing * data.numberRing +
                 data.bottomValue;
 
-            data.diameterRing2 = false;
-            data.numberRing2 = false;
+            delete data.diameterRing2;
+            delete data.numberRing2;
             data.distanceHome = +distance.value;
         }
 
