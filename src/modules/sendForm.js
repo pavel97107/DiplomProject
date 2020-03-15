@@ -6,8 +6,6 @@ const sendForm = (selector, elem) => {
   statusMessage.style.fontSize = "20px";
   statusMessage.style.fontWeight = "500";
   const elementForm = document.querySelectorAll("input");
-  const formDirector = document.querySelector('.director-form');
-  const body = document.querySelector('body');
   const userQuestion = document.querySelector('.userQuestion');
   // получаем данные с калькулятора
   const calcResult = document.getElementById("calc-result");
@@ -27,7 +25,9 @@ const sendForm = (selector, elem) => {
 
   const resetInput = () => {
     elementForm.forEach(item => {
-      item.value = "";
+      if (item.name === 'user_phone' || item.name === 'user_name' || item.name === 'user_quest') {
+        item.value = "";
+      }
     });
   };
 
