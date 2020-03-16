@@ -21,18 +21,28 @@ const sendForm = (selector, funcResetInput, elem) => {
   const calcResult = document.getElementById("calc-result");
 
 
+
+
   form.addEventListener("input", event => {
+
     let target = event.target;
     let text = target.value;
 
     if (target.name === "user_name") {
       target.value = text.replace(/[^а-яА-я]/g, "");
     }
+
+    let y = target.value.split('');
     if (target.name === "user_phone") {
-      target.value = text.replace(/[^\+0-9]/g, "");
+      for (let key of y) {
+        if (key === "+") {
+          target.value = "+";
+        } else {
+          target.value = text.replace(/[^+0-9]/g, '');
+        }
+      }
     }
   });
-
 
 
   const successMessage = response => {
