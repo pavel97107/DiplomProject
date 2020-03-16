@@ -8,7 +8,7 @@ const resetInput = () => {
 };
 
 
-const sendForm = (selector, elem) => {
+const sendForm = (selector, funcResetInput, elem) => {
   const form = document.querySelector(selector);
   const loadMessage = "Загрузка....";
   const error = "Что то пошло не так!";
@@ -41,7 +41,7 @@ const sendForm = (selector, elem) => {
       throw new Error("status network not 200");
     } else {
       statusMessage.textContent = "Спасибо, мы скоро свяжемся с вами!";
-      resetInput();
+      funcResetInput();
       setTimeout(() => {
         statusMessage.remove();
       }, 3000);
