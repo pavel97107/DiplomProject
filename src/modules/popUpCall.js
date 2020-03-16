@@ -1,3 +1,4 @@
+'use strict';
 const popUpCall = (selector, btn, btnClose, resetInput) => {
     const popUpWindow = document.querySelector(selector);
     const body = document.querySelector('body');

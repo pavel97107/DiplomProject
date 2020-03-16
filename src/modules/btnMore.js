@@ -1,3 +1,4 @@
+'use strict';
 const btnMore = () => {
     const container = document.querySelector('.sentence .row');
     const btn = document.querySelector('.add-sentence-btn');

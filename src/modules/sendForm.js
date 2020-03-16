@@ -1,3 +1,4 @@
+'use strict';
 const resetInput = () => {
   const elementForm = document.querySelectorAll("input");
   elementForm.forEach(item => {

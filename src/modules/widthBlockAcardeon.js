@@ -1,3 +1,4 @@
+'use strict';
 const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
     const headerElement = document.querySelectorAll(elemHeader);
     const collapseElement = document.querySelectorAll(elemContent);
