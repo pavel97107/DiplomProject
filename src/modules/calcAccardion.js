@@ -96,12 +96,10 @@ const calc = () => {
         }
 
 
+        calcResult.value = data.total;
         result.calc = JSON.stringify(data);
     };
 
-    const showTotal = () => {
-        calcResult.value = data.total;
-    };
 
     calcContainer.addEventListener("change", event => {
         let target = event.target;
@@ -111,9 +109,6 @@ const calc = () => {
         }
     });
 
-    showTotalbtn.addEventListener('click', () => {
-        showTotal();
-    });
 
 
 };
