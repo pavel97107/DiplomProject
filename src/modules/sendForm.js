@@ -23,7 +23,6 @@ const sendForm = (selector, funcResetInput, elem) => {
 
 
 
-
   form.addEventListener("input", event => {
 
     let target = event.target;

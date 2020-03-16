@@ -1,7 +1,10 @@
 'use strict';
 
 
-import popUpCall from './modules/popUpCall';
+import {
+    popUpCall,
+    blockButton
+} from './modules/popUpCall';
 import btnMore from './modules/btnMore';
 import AccardionBlock from './modules/widthBlockAcardeon';
 import {
@@ -13,7 +16,7 @@ import {
     result
 } from './modules/calcAccardion';
 
-
+blockButton();
 popUpCall('.popup-call', '.call-btn', '.callBtn', () => resetInput());
 popUpCall('.popup-discount', '.discount-btn', '.discountBtn', () => resetInput());
 popUpCall('.popup-check', '.check-btn', '.checkBtn', () => resetInput());

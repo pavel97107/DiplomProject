@@ -1,4 +1,13 @@
 'use strict';
+const blockButton = () => {
+    document.querySelector('.consultation-btn').disabled = true;
+    document.querySelector('.userQuestion').addEventListener('input', () => {
+        if (document.querySelector('.userQuestion').value) {
+            document.querySelector('.consultation-btn').disabled = false;
+        }
+    });
+};
+
 const popUpCall = (selector, btn, btnClose, resetInput) => {
     const popUpWindow = document.querySelector(selector);
     const body = document.querySelector('body');
@@ -25,16 +34,22 @@ const popUpCall = (selector, btn, btnClose, resetInput) => {
             addDisplay(popUpWindow);
             deleteMessageFunc();
             resetInput();
+            blockButton();
         }
         if (target.matches(selector)) {
             addDisplay(popUpWindow);
             deleteMessageFunc();
             resetInput();
+            blockButton();
         }
     });
+
 
 
 };
 
 
-export default popUpCall;
+export {
+    blockButton,
+    popUpCall
+};
