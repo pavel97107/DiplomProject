@@ -36,9 +36,6 @@ const AccardionBlock = (elemHeader, elemContent, elementContainer) => {
                 }
             });
         }
-
-
-        console.log(event.target);
     });
 
 

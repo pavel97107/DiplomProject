@@ -80,22 +80,43 @@ const calc = () => {
         data.diameterRing2 =
             diameterRingSelect2.options[diameterRingSelect2.selectedIndex].value;
 
+        data.numberRingOne =
+            numberRingSelect.options[numberRingSelect.selectedIndex].textContent;
+        data.diameterRingOne =
+            diameterRingSelect.options[diameterRingSelect.selectedIndex].textContent;
+
+        data.numberRingTwo =
+            numberRingSelect2.options[numberRingSelect2.selectedIndex].textContent;
+        data.diameterRingTwo =
+            diameterRingSelect2.options[diameterRingSelect2.selectedIndex].textContent;
+
 
         if (data.price === 15000) {
             data.total =
-                data.price * data.diameterRing * data.numberRing * data.diameterRing2 * data.numberRing2 +
+                data.price * data.numberRing * data.diameterRing * data.numberRing2 * data.diameterRing2 +
                 data.bottomValue;
             data.distanceHome = +distance.value;
         } else {
             data.total =
-                data.price * data.diameterRing * data.numberRing +
+                data.price * data.numberRing * data.diameterRing +
                 data.bottomValue;
 
             delete data.diameterRing2;
             delete data.numberRing2;
+            delete data.numberRingTwo;
+            delete data.diameterRingTwo;
             data.distanceHome = +distance.value;
         }
 
+        data.diameterRing = data.diameterRingOne;
+        data.numberRing = data.numberRingOne;
+        delete data.diameterRing;
+        delete data.numberRing;
+
+        data.diameterRing2 = data.diameterRingTwo;
+        data.numberRing2 = data.numberRingTwo;
+        delete data.diameterRing2;
+        delete data.numberRing2;
 
         calcResult.value = data.total;
         result.calc = JSON.stringify(data);

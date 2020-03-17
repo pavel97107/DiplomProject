@@ -45,6 +45,8 @@ const sendForm = (selector, funcResetInput, elem) => {
   });
 
 
+
+
   const successMessage = response => {
     if (response.status !== 200) {
       statusMessage.textContent = error;
@@ -90,7 +92,7 @@ const sendForm = (selector, funcResetInput, elem) => {
     return fetch("./server.php", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify(body)
     });
