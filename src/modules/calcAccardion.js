@@ -16,6 +16,7 @@ const calc = () => {
     const distance = document.querySelector(".distance");
 
     // Функция удаляет класс (display = none)
+    // она относится к опциям
     const itemsDisabledFalse = () => {
         itemDis.forEach(item => {
             item.classList.remove("itemDisabled");
@@ -23,22 +24,32 @@ const calc = () => {
     };
 
     // Функция добовляет класс (display = none)
+    // если тип септика однокамерный то эта функция скрывает опции которые отвечают за второй колодец
     const itemsDisabledTrue = () => {
         itemDis.forEach(item => {
             item.classList.add("itemDisabled");
         });
     };
 
-    //main object
+    //объект где находятся данные с калькулятора
     const data = {};
 
 
     // total - общая сумма
     // bottomValue - наличие дна
+    // цена за тип септика
     data.price = 10000;
     data.total = '';
     data.bottomValue = 1000;
 
+
+
+    // этот обработчик события отслеживает клик по выбору типа септика (однокамерный или двухкамерный)
+    // по дефолту стоит однокамерный значит price = 10000, при клике кнопку смену типа навешивается класс,
+    //'two' потом условие проверяет если есть класс 'two' тогда price 15000 если нету тогда 10000, также происходим со дном колодца
+    // если target '.checkBottom' тоесть мы нажали на кнопку которая отвечает за наличие дна то  мы добовляем класс bottomFalse (который означает что дно не нужно и value дна = 0)
+    // если класса 'bottomFalse' нету ету тогда мы проверяем наличие класса 'two' который накладывается на тип септика если он есть то value=2000 если нету то value=1000
+    // (цена за дно плюсуется сразу к сумме типа септика потому что по дефолту он есть если открыть вкладу)
     calcContainer.addEventListener("click", event => {
         let target = event.target;
 
@@ -67,8 +78,22 @@ const calc = () => {
                 }
             }
         }
+        // если нажимаю на кнопку "следущий шаг" или другую вкладку то происходит расчет
+        if (target.closest('.btn-step') || target.closest('.calc-heading')) {
+            calculationOneType();
+        }
     });
 
+
+
+
+    // сдесь мы получаем данные с опций
+    // если price 15000 то высчитываются все опции и инпут с расстояние
+    // если price 10000 то высчитывается опции только с блока который отвечает за один колодец
+    // а вторые опции которые отвечают за второй колодец они удаляются из формулы так как они не нужны
+    // потом происходит вычисление и сумма (data.total) записывается в CalcResult.value
+    // в этой функци объект заполнен нужными нам данными и мы его присваиваем в объект result, который потом экспортируем
+    // и передаем в модуль sendForm где записваем его в объект с данными с формы
     const calculationOneType = () => {
         data.numberRing =
             numberRingSelect.options[numberRingSelect.selectedIndex].value;
@@ -80,15 +105,6 @@ const calc = () => {
         data.diameterRing2 =
             diameterRingSelect2.options[diameterRingSelect2.selectedIndex].value;
 
-        data.numberRingOne =
-            numberRingSelect.options[numberRingSelect.selectedIndex].textContent;
-        data.diameterRingOne =
-            diameterRingSelect.options[diameterRingSelect.selectedIndex].textContent;
-
-        data.numberRingTwo =
-            numberRingSelect2.options[numberRingSelect2.selectedIndex].textContent;
-        data.diameterRingTwo =
-            diameterRingSelect2.options[diameterRingSelect2.selectedIndex].textContent;
 
 
         if (data.price === 15000) {
@@ -103,26 +119,18 @@ const calc = () => {
 
             delete data.diameterRing2;
             delete data.numberRing2;
-            delete data.numberRingTwo;
-            delete data.diameterRingTwo;
+
             data.distanceHome = +distance.value;
         }
 
-        data.diameterRing = data.diameterRingOne;
-        data.numberRing = data.numberRingOne;
-        delete data.diameterRing;
-        delete data.numberRing;
-
-        data.diameterRing2 = data.diameterRingTwo;
-        data.numberRing2 = data.numberRingTwo;
-        delete data.diameterRing2;
-        delete data.numberRing2;
 
         calcResult.value = data.total;
         result.calc = JSON.stringify(data);
     };
 
-
+    // этот листенер отслеживает изменения в инпутах и опциях, каждый раз когда меняется значение тогда срабатывает фукция calculationOneType()
+    // которая производит расчет
+    // онлайн калькулятор так сказать
     calcContainer.addEventListener("change", event => {
         let target = event.target;
 
